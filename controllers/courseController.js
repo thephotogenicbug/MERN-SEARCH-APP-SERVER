@@ -1,25 +1,27 @@
 const Course = require("../models/courseModel");
+const ErrorHandler = require("../utils/errorHandler");
+const catchAsyncError = require("../middlewares/catchAsyncError");
 
 // get all course
-exports.getAllCourse = async (req, res) => {
+exports.getAllCourse = catchAsyncError(async (req, res) => {
   const courses = await Course.find();
   res.status(200).json({
     success: true,
     courses,
   });
-};
+});
 
 // create course
-exports.createCourse = async (req, res, next) => {
+exports.createCourse = catchAsyncError(async (req, res, next) => {
   const course = await Course.create(req.body);
   res.status(201).json({
     success: true,
     course,
   });
-};
+});
 
 // update course
-exports.updateCourse = async (req, res) => {
+exports.updateCourse = catchAsyncError(async (req, res) => {
   let course = await Course.findById(req.params.id);
 
   if (!course) {
@@ -38,26 +40,23 @@ exports.updateCourse = async (req, res) => {
     success: true,
     course,
   });
-};
+});
 
 // get course details
-exports.getCourseDetails = async (req, res) => {
+exports.getCourseDetails = catchAsyncError(async (req, res) => {
   const course = await Course.findById(req.params.id);
 
   if (!course) {
-    return res.status(500).json({
-      success: false,
-      message: "Course not found",
-    });
+   return next(new ErrorHandler("Course not found", 404));
   }
   res.status(200).json({
     success: true,
     course,
   });
-};
+});
 
 // delete course data
-exports.deleteCourse = async (req, res) => {
+exports.deleteCourse = catchAsyncError(async (req, res) => {
   const course = await Course.findById(req, params.id);
 
   if (course) {
@@ -72,4 +71,4 @@ exports.deleteCourse = async (req, res) => {
     success: true,
     message: "Course deleted successfully...",
   });
-};
+});
