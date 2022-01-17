@@ -59,7 +59,7 @@ exports.getCourseDetails = catchAsyncError(async (req, res) => {
 exports.deleteCourse = catchAsyncError(async (req, res) => {
   const course = await Course.findById(req, params.id);
 
-  if (course) {
+  if (!course) {
     return res.status(500).json({
       success: false,
       message: "Course not found",
