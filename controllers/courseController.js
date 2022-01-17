@@ -29,7 +29,7 @@ exports.updateCourse = async (req, res) => {
     });
   }
 
-  course = await Product.findByIdAndUpdate(req.params.id, req.body, {
+  course = await Course.findByIdAndUpdate(req.params.id, req.body, {
     new: true,
     runValidators: true,
     useFindAndModify: false,
