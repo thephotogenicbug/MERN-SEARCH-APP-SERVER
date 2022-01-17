@@ -39,3 +39,37 @@ exports.updateCourse = async (req, res) => {
     course,
   });
 };
+
+// get course details
+exports.getCourseDetails = async (req, res) => {
+  const course = await Course.findById(req.params.id);
+
+  if (!course) {
+    return res.status(500).json({
+      success: false,
+      message: "Course not found",
+    });
+  }
+  res.status(200).json({
+    success: true,
+    course,
+  });
+};
+
+// delete course data
+exports.deleteCourse = async (req, res) => {
+  const course = await Course.findById(req, params.id);
+
+  if (course) {
+    return res.status(500).json({
+      success: false,
+      message: "Course not found",
+    });
+  }
+  await course.remove();
+
+  res.status(200).json({
+    success: true,
+    message: "Course deleted successfully...",
+  });
+};
