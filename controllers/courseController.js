@@ -1,13 +1,21 @@
 const Course = require("../models/courseModel");
 const ErrorHandler = require("../utils/errorHandler");
 const catchAsyncError = require("../middlewares/catchAsyncError");
+const FilterFeatures = require("../utils/FilterFeatures");
 
 // get all course
 exports.getAllCourse = catchAsyncError(async (req, res) => {
-  const courses = await Course.find();
+  const resultPerPage = 5;
+  const courseCount = await Course.countDocuments()
+  const filterFeature = new FilterFeatures(Course.find(), req.query)
+    .search()
+    .filter()
+    .pagination(resultPerPage);
+  const courses = await filterFeature.query;
   res.status(200).json({
     success: true,
     courses,
+    courseCount
   });
 });
 
