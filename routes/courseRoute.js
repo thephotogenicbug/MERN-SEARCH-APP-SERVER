@@ -4,5 +4,5 @@ const router = express.Router()
 
 router.route('/courses').get(getAllCourse)
 router.route('/course/new').post(createCourse)
-router.route('/course/:id').put(updateCourse).get(getCourseDetails).delete(deleteCourse)
+router.route('/course/:id').get(getCourseDetails)
 module.exports = router

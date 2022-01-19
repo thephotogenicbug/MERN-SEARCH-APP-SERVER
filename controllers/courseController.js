@@ -15,7 +15,8 @@ exports.getAllCourse = catchAsyncError(async (req, res) => {
   res.status(200).json({
     success: true,
     courses,
-    courseCount
+    courseCount,
+    resultPerPage,
   });
 });
 

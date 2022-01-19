@@ -42,7 +42,7 @@ const courseSchema = mongoose.Schema({
     type: Number,
     required: [true, "Please enter application fee details"],
   },
-  totalfee: {
+  price: {
     type: Number,
     required: [true, "Please enter total tution fee details"],
   },
