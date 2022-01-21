@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 const validator = require("validator");
-const bcrypt = require("bcrypt");
+const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const crypto = require("crypto");
 
@@ -8,8 +8,8 @@ const userSchema = new mongoose.Schema({
   name: {
     type: String,
     required: [true, "Please enter your name"],
-    maxlength: [30, "name cannot exceed 30 characters"],
-    minlength: [4, "name should have more than 4 characcters"],
+    maxLength: [30, "Name cannot exceed 30 characters"],
+    minlength: [4, "Name should have more than 4 characters"],
   },
   email: {
     type: String,
@@ -20,7 +20,7 @@ const userSchema = new mongoose.Schema({
   password: {
     type: String,
     required: [true, "Please enter your password"],
-    minlength: [8, "password should be greater than 8 characters"],
+    minlength: [8, "password should be greater then 8 characters"],
     select: false,
   },
   avatar: {
@@ -74,7 +74,7 @@ userSchema.methods.getResetPasswordToken = function () {
 
   this.resetPasswordExpire = Date.now() + 15 * 60 * 1000;
 
-  return resetToken
+  return resetToken;
 };
 
 module.exports = mongoose.model("User", userSchema);
