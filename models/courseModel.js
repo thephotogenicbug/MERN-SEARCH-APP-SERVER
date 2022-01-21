@@ -62,18 +62,10 @@ const courseSchema = mongoose.Schema({
     type: String,
     required: [true, "Please enter remarks details"],
   },
-  collegelogo: [
-    {
-      public_id: {
-        type: String,
-        required: true,
-      },
-      url: {
-        type: String,
-        required: true,
-      },
-    },
-  ],
+  totalfee: {
+    type: String,
+    required: [true, "Please enter total fee details"],
+  },
   createdAt: {
     type: Date,
     default: Date.now,
