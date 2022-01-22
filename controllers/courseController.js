@@ -5,8 +5,8 @@ const FilterFeatures = require("../utils/FilterFeatures");
 
 // get all course
 exports.getAllCourse = catchAsyncError(async (req, res) => {
-  const resultPerPage = 5;
-  const courseCount = await Course.countDocuments()
+  const resultPerPage = 15;
+  const courseCount = await Course.countDocuments();
   const filterFeature = new FilterFeatures(Course.find(), req.query)
     .search()
     .filter()
@@ -56,7 +56,7 @@ exports.getCourseDetails = catchAsyncError(async (req, res) => {
   const course = await Course.findById(req.params.id);
 
   if (!course) {
-   return next(new ErrorHandler("Course not found", 404));
+    return next(new ErrorHandler("Course not found", 404));
   }
   res.status(200).json({
     success: true,
