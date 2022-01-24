@@ -45,7 +45,7 @@ exports.loginUser = catchAsyncErrors(async (req, res, next) => {
     return next(new ErrorHandler("Invalid email or password", 401));
   }
 
- sendToken(user, 201, res);
+  sendToken(user, 201, res);
 });
 
 // forgot password --user
@@ -55,7 +55,7 @@ exports.forgotPassword = catchAsyncErrors(async (req, res, next) => {
     return next(new ErrorHandler("User not found", 404));
   }
 
-  // reset password 
+  // reset password
   const resetToken = user.getResetPasswordToken();
 
   await user.save({ validateBeforeSave: false });
@@ -131,4 +131,14 @@ exports.resetPassword = catchAsyncErrors(async (req, res, next) => {
   await user.save();
 
   sendToken(user, 200, res);
+});
+
+// Get user Details
+exports.getUserDetails = catchAsyncErrors(async (req, res, next) => {
+  const user = await User.findById(req.user.id);
+
+  res.status(201).json({
+    success: true,
+    user,
+  });
 });
