@@ -7,20 +7,20 @@ const crypto = require("crypto");
 const userSchema = new mongoose.Schema({
   name: {
     type: String,
-    required: [true, "Please enter your name"],
+    required: [true, "Please Enter Your Name"],
     maxLength: [30, "Name cannot exceed 30 characters"],
-    minlength: [4, "Name should have more than 4 characters"],
+    minLength: [4, "Name should have more than 4 characters"],
   },
   email: {
     type: String,
-    required: [true, "Please enter your email"],
+    required: [true, "Please Enter Your Email"],
     unique: true,
-    validate: [validator.isEmail, "Please enter a valid email"],
+    validate: [validator.isEmail, "Please Enter a valid Email"],
   },
   password: {
     type: String,
-    required: [true, "Please enter your password"],
-    minlength: [8, "password should be greater then 8 characters"],
+    required: [true, "Please Enter Your Password"],
+    minLength: [8, "Password should be greater than 8 characters"],
     select: false,
   },
   avatar: {
@@ -37,6 +37,11 @@ const userSchema = new mongoose.Schema({
     type: String,
     default: "user",
   },
+  createdAt: {
+    type: Date,
+    default: Date.now,
+  },
+
   resetPasswordToken: String,
   resetPasswordExpire: Date,
 });
@@ -56,14 +61,15 @@ userSchema.methods.getJWTToken = function () {
   });
 };
 
-// Compare password
-userSchema.methods.comparePassword = async function (enteredPassword) {
-  return await bcrypt.compare(enteredPassword, this.password);
+// Compare Password
+
+userSchema.methods.comparePassword = async function (password) {
+  return await bcrypt.compare(password, this.password);
 };
 
-// Generating password reset token
+// Generating Password Reset Token
 userSchema.methods.getResetPasswordToken = function () {
-  // generate Token
+  // Generating Token
   const resetToken = crypto.randomBytes(20).toString("hex");
 
   // Hashing and adding resetPasswordToken to userSchema

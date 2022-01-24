@@ -27,26 +27,31 @@ exports.registerUser = catchAsyncErrors(async (req, res, next) => {
   sendToken(user, 201, res);
 });
 // login --user
+// Login User
 exports.loginUser = catchAsyncErrors(async (req, res, next) => {
   const { email, password } = req.body;
-  //checking if user has given password and email
+
+  // checking if user has given password and email both
+
   if (!email || !password) {
-    return next(new ErrorHandler("Please enter email and password", 400));
+    return next(new ErrorHandler("Please Enter Email & Password", 400));
   }
+
   const user = await User.findOne({ email }).select("+password");
 
   if (!user) {
     return next(new ErrorHandler("Invalid email or password", 401));
   }
 
-  const isPasswordMatch = await user.comparePassword(password);
+  const isPasswordMatched = await user.comparePassword(password);
 
-  if (!isPasswordMatch) {
+  if (!isPasswordMatched) {
     return next(new ErrorHandler("Invalid email or password", 401));
   }
 
-  sendToken(user, 201, res);
+  sendToken(user, 200, res);
 });
+
 
 // forgot password --user
 exports.forgotPassword = catchAsyncErrors(async (req, res, next) => {
@@ -94,7 +99,7 @@ exports.logout = catchAsyncErrors(async (req, res, next) => {
 
   res.status(200).json({
     success: true,
-    message: "Logged out",
+    message: "Logged Out",
   });
 });
 
