@@ -5,7 +5,7 @@ const FilterFeatures = require("../utils/FilterFeatures");
 
 // get all course
 exports.getAllCourse = catchAsyncError(async (req, res) => {
-  const resultPerPage = 10;
+  const resultPerPage = 15;
   const coursesCount = await Course.countDocuments();
   const filterFeature = new FilterFeatures(Course.find(), req.query)
     .search()
