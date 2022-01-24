@@ -22,17 +22,16 @@ cloudinary.config({
   api_secret: process.env.CLOUDINARY_API_SECRET,
 });
 
+const PORT = process.env.PORT || 5000;
 
-const server = app.listen(process.env.PORT, () => {
-  console.log(`Server is working on http://localhost:${process.env.PORT}`);
-});
+app.listen(PORT, console.log(`Server is running on ${PORT}`));
 
 // unhandled Promise rejection
-process.on("unhandledRejection", (err) => {
-  console.log(`Error: ${err.message}`);
-  console.log(`Shutting down the server due to unhandled promise rejection`);
+// process.on("unhandledRejection", (err) => {
+//   console.log(`Error: ${err.message}`);
+//   console.log(`Shutting down the server due to unhandled promise rejection`);
 
-  server.close(() => {
-    process.exit(1);
-  });
-});
+//   server.close(() => {
+//     process.exit(1);
+//   });
+// });
