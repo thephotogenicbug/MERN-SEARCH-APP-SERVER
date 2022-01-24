@@ -18,6 +18,10 @@ app.use("/api/v1", course);
 const user = require('./routes/userRoute')
 app.use('/api/v1', user)
 
+app.get("/", (req, res) => {
+  res.send("api is running...");
+});
+
 // Error middleware
 app.use(errorMiddleware);
 
