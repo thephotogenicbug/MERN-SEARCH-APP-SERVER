@@ -54,6 +54,10 @@ const courseSchema = mongoose.Schema({
     type: String,
     required: [true, "Please enter third year fee details"],
   },
+  fourthyear: {
+    type: String,
+    required: [true, "Please enter fourth year fee details"],
+  },
   price: {
     type: Number,
     required: [true, "Please enter total tution fee details"],
