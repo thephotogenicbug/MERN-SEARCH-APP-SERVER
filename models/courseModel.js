@@ -82,6 +82,10 @@ const courseSchema = mongoose.Schema({
     type: String,
     required: [true, "Please enter total fee details"],
   },
+  programcode:{
+    type:String,
+    required:[true, "Please enter program code "],
+  },
   createdAt: {
     type: Date,
     default: Date.now,
