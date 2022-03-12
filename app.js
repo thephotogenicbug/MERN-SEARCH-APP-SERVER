@@ -17,6 +17,9 @@ const course = require("./routes/courseRoute");
 app.use("/api/v1", course);
 const user = require('./routes/userRoute')
 app.use('/api/v1', user)
+const form = require('./routes/onlineRoute')
+app.use('/api/v1', form)
+
 
 app.get("/", (req, res) => {
   res.send("api is running...");
