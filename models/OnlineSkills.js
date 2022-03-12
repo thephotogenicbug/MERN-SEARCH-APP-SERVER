@@ -13,7 +13,6 @@ const onlineSchema = mongoose.Schema({
   email: {
     type: String,
     required: [true, "Please Enter Your Email ID"],
-    unique: true,
     validate: [validator.isEmail, "Please Enter a valid Email"],
   },
   country: {
